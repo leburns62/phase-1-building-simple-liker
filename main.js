@@ -2,7 +2,36 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+let modal = document.querySelector('div#modal h2')
+  modal.className = 'hidden'
+
+  let likes = document.querySelectorAll('.like')
+
+  for (let like of likes) {
+    like.addEventListener('click', likeCallback())
+}
+
+function likeCallback(e) {
+  let heart = e.target
+    if (heart === EMPTY_HEART) {
+    mimicServerCall()
+    .then(() => {
+      modal.className = ""
+    })
+    .catch(error => error.message)
+    setTimeout(modal.className = 'hidden',5)
+    .then( () => {
+      like.innerText=FULL_HEART
+      like.className='activated-heart'
+    })
+  } else {
+    mimicServerCall()
+    .then( () => {
+      like.innerText = EMPTY_HEART
+      like.className = ''
+    })
+  }
+}
 
 
 
